@@ -401,6 +401,8 @@ class DenseAmpcor(Component):
 
         ###run ampcor on parallel processes
         threads = []
+        if self.numLocationDown < self.numberThreads:
+            self.numberThreads = self.numLocationDown
         nominal_load = self.numLocationDown // self.numberThreads
         flat_indices = np.arange(numlen).reshape((self.numLocationDown,self.numLocationAcross))
         ofmt = 'Thread %d: %7d%7d%7d%7d%7d%7d'
